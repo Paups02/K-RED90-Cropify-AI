@@ -66,6 +66,11 @@ export const generateApi = {
     const response = await api.get('/api/generate/types');
     return response.data;
   },
+
+  chart: async (params) => {
+    const response = await api.post('/api/generate/chart', params);
+    return response.data;
+  },
 };
 
 // Stats API

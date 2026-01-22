@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Documents from './pages/Documents';
 import Generate from './pages/Generate';
+import Charts from './pages/Charts';
 import Chat from './pages/Chat';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/documents" element={<Documents />} />
           <Route path="/generate" element={<Generate />} />
+          <Route path="/charts" element={<Charts />} />
           <Route path="/chat" element={<Chat />} />
         </Routes>
       </Layout>

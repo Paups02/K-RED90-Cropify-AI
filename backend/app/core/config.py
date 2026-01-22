@@ -13,8 +13,11 @@ class Settings(BaseSettings):
     host: str = "0.0.0.0"
     port: int = 8000
 
-    # OpenAI
-    openai_api_key: str = ""
+    # Anthropic (Claude)
+    anthropic_api_key: str = ""
+
+    # Google (Gemini para gráficos)
+    google_api_key: str = ""
 
     # Upload settings
     max_upload_size: int = 52428800  # 50MB

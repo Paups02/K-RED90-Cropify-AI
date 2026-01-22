@@ -250,3 +250,52 @@ async def get_generation_types():
         },
     }
     return types
+
+
+@router.post("/chart")
+async def generate_chart(request: QueryRequest):
+    """
+    Generate chart/graph data based on documents.
+    Returns structured data for frontend visualization.
+    """
+    if vector_store.get_document_count() == 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No hay documentos cargados. Por favor, suba documentos primero.",
+        )
+
+    # Get relevant context
+    context, sources = get_relevant_context(
+        request.query,
+        request.document_ids,
+        top_k=10,
+    )
+
+    if not context:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="No se encontró información relevante en los documentos.",
+        )
+
+    # Generate chart data
+    try:
+        result = ai_service.generate_chart_data(request.query, context)
+
+        if result["success"]:
+            return {
+                "success": True,
+                "chart_data": result["data"],
+                "sources": [s["filename"] for s in sources],
+            }
+        else:
+            return {
+                "success": False,
+                "error": result["error"],
+                "sources": [s["filename"] for s in sources],
+            }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error generando gráfico: {str(e)}",
+        )

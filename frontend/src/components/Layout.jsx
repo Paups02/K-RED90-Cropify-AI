@@ -5,13 +5,15 @@ import {
   MessageSquare,
   Upload,
   LayoutDashboard,
-  Sparkles
+  Sparkles,
+  BarChart3
 } from 'lucide-react';
 
 const navItems = [
   { path: '/', icon: LayoutDashboard, label: 'Inicio' },
   { path: '/documents', icon: FileText, label: 'Documentos' },
   { path: '/generate', icon: Sparkles, label: 'Generar' },
+  { path: '/charts', icon: BarChart3, label: 'Graficos' },
   { path: '/chat', icon: MessageSquare, label: 'Chat' },
 ];
 
